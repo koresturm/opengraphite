@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import type { Opengraph } from "~/lib/type";
+import { Opengraph } from "../type";
 
 export type OpenGraphContextType = {
     openGraphData: Opengraph;
