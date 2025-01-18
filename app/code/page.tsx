@@ -7,16 +7,17 @@ import templates from "@/lib/templates"
 import { useState, useEffect } from "react"
 import { codeToHtml } from 'shiki'
 import { Clipboard } from "lucide-react"
+import Link from "next/link"
 
 const code = () => {
 
   const { openGraphData } = useOpenGraphContext()
 
-  const [ framework , setFramework ] = useState('html')
+  const [framework, setFramework] = useState('html')
 
-  const [ highlightedCode , setHighlightedCode ] = useState('')
+  const [highlightedCode, setHighlightedCode] = useState('')
 
-  const [ rawText , setRawText ] = useState('')
+  const [rawText, setRawText] = useState('')
 
   const runHighlighting = async () => {
 
@@ -41,36 +42,40 @@ const code = () => {
 
       <div className='w-full md:w-[600px] flex flex-col gap-4'>
         <Select
-            value={framework} 
-            onValueChange={type => setFramework(type)}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select a framework" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Frameworks</SelectLabel>
-                {Object.entries(templates).map(([key , value]) =>
-                  <SelectItem value={key} key={key}>
-                    <div className='flex items-center gap-2 w-full'>
-                      <value.icon />
-                      <p>{key.toUpperCase()}</p>
-                    </div>
-                  </SelectItem>
-                )
-                }
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          value={framework}
+          onValueChange={type => setFramework(type)}
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select a framework" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Frameworks</SelectLabel>
+              {Object.entries(templates).map(([key, value]) =>
+                <SelectItem value={key} key={key}>
+                  <div className='flex items-center gap-2 w-full'>
+                    <value.icon />
+                    <p>{key.toUpperCase()}</p>
+                  </div>
+                </SelectItem>
+              )
+              }
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
-          <div dangerouslySetInnerHTML={{__html: highlightedCode }} className='w-full overflow-hidden rounded'></div>
+        <div dangerouslySetInnerHTML={{ __html: highlightedCode }} className='w-full overflow-hidden rounded'></div>
 
-          <Button variant={'secondary'} onClick={() => navigator.clipboard.writeText(rawText)} className='w-full'>
-            Copy <Clipboard />
-          </Button>
+        <Button variant={'secondary'} onClick={() => navigator.clipboard.writeText(rawText)} className='w-full'>
+          Copy <Clipboard />
+        </Button>
+
+        <Button variant={'secondary'} asChild>
+          <Link href='/' className='font-bold'>
+            Cancel
+          </Link>
+        </Button>
       </div>
-      
-      
     </div>
   )
 }
