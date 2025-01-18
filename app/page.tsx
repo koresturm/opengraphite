@@ -4,7 +4,10 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <section className="w-full h-screen flex flex-col items-center justify-center gap-4 p-4">
+    <section className="w-full h-screen flex flex-col items-center justify-center gap-4 p-4 relative z-0">
+      <div className="size-full absolute -z-10 blur-2xl">
+        <img src="/opengraph.png" alt="Opengraphite" className="size-full object-cover" />
+      </div>
       <h1 className="text-2xl md:text-5xl lg:text-7xl font-bold">Opengraphite</h1>
       <p className="text-lg">
         A simple tool to generate opengraph tags for your website.
