@@ -1,4 +1,3 @@
-
 "use client"
 
 import { Button } from '@/components/ui/button'
@@ -29,8 +28,8 @@ const EditorPage = () => {
         />
 
         <Input
-          value={form.url}
-          onChange={(e) => setForm({ ...form, url: e.target.value })} placeholder='Site URL'
+          value={form.domain}
+          onChange={(e) => setForm({ ...form, domain: e.target.value })} placeholder='Site Domain e.g example.com'
         />
 
         <Textarea

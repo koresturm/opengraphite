@@ -15,7 +15,7 @@ export default {
         <meta property="og:title" content="${og.title}" />
         <meta property="og:description" content="${og.description}" />
         <meta property="og:type" content="${og.type}" />
-        <meta property="og:url" content="${og.url}" />
+        <meta property="og:url" content="https://${og.domain}" />
       </head>
           `;
     },
@@ -33,7 +33,7 @@ export default {
         <meta property="og:title" content="${og.title}" />
         <meta property="og:description" content="${og.description}" />
         <meta property="og:type" content="${og.type}" />
-        <meta property="og:url" content="${og.url}" />
+        <meta property="og:url" content="https://${og.domain}" />
       </svelte:head>
           `;
     },
@@ -50,11 +50,11 @@ export default {
   openGraph: {
     title: "${og.title}",
     description: "${og.description}",
-    url: "${og.url}",
+    url: "https://${og.domain}",
     siteName: "${og.title}",
     images: [
       {
-        url: "${og.url}/opengraph.png",
+        url: "https://${og.domain}/opengraph.png",
         width: 1200,
         height: 630,
         alt: "${og.title}",
