@@ -87,7 +87,7 @@ export default {
   },
 
   ${
-    og.twitter && 
+    og.twitter ?
     `
     twitter: {
     title: "${og.title}",
@@ -96,7 +96,7 @@ export default {
     site: "@${og.twitter?.site}",
     creator: "@${og.twitter?.creator}",
   }
-    `
+    ` : ''
   }
  } `;
     },

@@ -76,7 +76,7 @@ const code = () => {
           </SelectContent>
         </Select>
 
-        <div dangerouslySetInnerHTML={{ __html: highlightedCode }} className='w-full overflow-hidden rounded'></div>
+        <div dangerouslySetInnerHTML={{ __html: highlightedCode }} className='w-full h-[300px] overflow-auto rounded'></div>
 
         <Button variant={'secondary'} onClick={copyToClipboard} className='w-full'>
           Copy <Clipboard />

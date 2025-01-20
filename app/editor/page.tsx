@@ -1,5 +1,6 @@
 "use client"
 
+import TwitterLogo from '@/components/shared/TwitterLogo'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -32,7 +33,19 @@ const EditorPage = () => {
   const toggleTwitter = (checked: boolean) => {
 
      if(checked) setForm({ ...form, twitter: { card: 'summary_large_image' , creator: '', site: '' } })
-     else setForm({ ...form, twitter: undefined })
+     else setForm({...removeKey('twitter')})
+  }
+
+  const removeKey = (key: string) => {
+    let newObject: Record<string , any> = {}
+
+    for (const [k, v] of Object.entries(form)) {
+      if (k !== key) {
+        newObject[k] = v
+      }
+    }
+
+    return newObject as Opengraph
   }
 
   useEffect(() => {
@@ -78,7 +91,7 @@ const EditorPage = () => {
 
         <div className='w-full flex flex-col gap-4 p-2 border rounded-md'>
           <div className='w-full flex gap-4 p-2 rounded-md justify-between items-center'>
-            <small>Twitter</small>
+            <TwitterLogo />
 
             <Switch onCheckedChange={toggleTwitter} />
           </div>
