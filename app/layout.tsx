@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import StateComponent from "@/components/shared/StateComponent";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Opengraphite",
@@ -59,6 +60,7 @@ export default function RootLayout({
         <StateComponent>
           {children}
         </StateComponent>
+        <Toaster />
       </body>
     </html>
   );

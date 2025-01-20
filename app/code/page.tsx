@@ -8,6 +8,7 @@ import { useState, useEffect } from "react"
 import { codeToHtml } from 'shiki'
 import { Clipboard } from "lucide-react"
 import Link from "next/link"
+import { toast } from "@/hooks/use-toast"
 
 const code = () => {
 
@@ -33,6 +34,15 @@ const code = () => {
     })
 
     setHighlightedCode(highlighted)
+  }
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(rawText)
+
+    toast({
+      description: 'Code copied to clipboard',
+      duration: 1000
+    })
   }
 
   useEffect(() => {
@@ -68,7 +78,7 @@ const code = () => {
 
         <div dangerouslySetInnerHTML={{ __html: highlightedCode }} className='w-full overflow-hidden rounded'></div>
 
-        <Button variant={'secondary'} onClick={() => navigator.clipboard.writeText(rawText)} className='w-full'>
+        <Button variant={'secondary'} onClick={copyToClipboard} className='w-full'>
           Copy <Clipboard />
         </Button>
 
