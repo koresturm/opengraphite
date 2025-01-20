@@ -104,13 +104,13 @@ const EditorPage = () => {
 
               <Input
                 value={form.twitter.site}
-                onChange={(e) => setForm({ ...form, twitter: { ...form.twitter, site: e.target.value } })}
+                onChange={(e) => setForm({ ...form, twitter: { ...form.twitter, site: e.target.value } } as any)}
                 placeholder='Site' className='resize-none'
               />
 
               <Input
                 value={form.twitter.creator}
-                onChange={(e) => setForm({ ...form, twitter: { ...form.twitter, creator: e.target.value } })}
+                onChange={(e) => setForm({ ...form, twitter: { ...form.twitter, creator: e.target.value } } as any)}
                 placeholder='Creator' className='resize-none'
               />
             </>
