@@ -1,7 +1,7 @@
-import html from "@/components/framework-logos/html";
 import type { Opengraph } from "./type";
+import html from "@/components/framework-logos/html";
 import svelte from "@/components/framework-logos/svelte";
-
+import nextjs from "@/components/framework-logos/nextjs";
 
 export default {
   html: {
@@ -18,9 +18,10 @@ export default {
         <meta property="og:url" content="${og.url}" />
       </head>
           `;
-     },
-     icon: html
     },
+    icon: html,
+    lang: 'html'
+  },
   svelte: {
     code(og: Opengraph) {
       return `
@@ -36,6 +37,34 @@ export default {
       </svelte:head>
           `;
     },
-    icon: svelte
+    icon: svelte,
+    lang: 'svelte'
+  },
+  nextjs: {
+    code(og: Opengraph) {
+      return `
+  export const metadata: Metadata = {
+  title: "${og.title}",
+  description: "${og.description}",
+
+  openGraph: {
+    title: "${og.title}",
+    description: "${og.description}",
+    url: "${og.url}",
+    siteName: "${og.title}",
+    images: [
+      {
+        url: "${og.url}/opengraph.png",
+        width: 1200,
+        height: 630,
+        alt: "${og.title}",
+      },
+    ],
   }
-} as Record<string, { code: (og: Opengraph) => string , icon: any }>;
+  }
+      `;
+    },
+    icon: nextjs,
+    lang: 'javascript'
+  },
+} as Record<string, { code: (og: Opengraph) => string; icon: any , lang: string }>;

@@ -1,12 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <section className="w-full h-screen flex flex-col items-center justify-center gap-4 p-4 relative z-0">
       <div className="size-full absolute -z-10 blur-2xl">
-        <img src="/opengraph.png" alt="Opengraphite" className="size-full object-cover" />
+        <Image
+        src="/opengraph.png"
+        alt="Opengraphite"
+        width={1200}
+        height={630}
+        className="size-full object-cover" 
+        />
       </div>
       <h1 className="text-2xl md:text-5xl lg:text-7xl font-bold">Opengraphite</h1>
       <p className="text-lg">

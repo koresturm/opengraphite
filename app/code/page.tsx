@@ -21,16 +21,18 @@ const code = () => {
 
   const runHighlighting = async () => {
 
-    const raw_text = templates[framework].code(openGraphData)
+    const { code , lang  } = templates[framework]
+
+    const raw_text = code(openGraphData)
 
     setRawText(raw_text)
 
-    const code = await codeToHtml(raw_text, {
-      lang: framework,
+    const highlighted = await codeToHtml(raw_text, {
+      lang,
       theme: 'vitesse-dark'
     })
 
-    setHighlightedCode(code)
+    setHighlightedCode(highlighted)
   }
 
   useEffect(() => {
