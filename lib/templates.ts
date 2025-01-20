@@ -16,11 +16,23 @@ export default {
         <meta property="og:description" content="${og.description}" />
         <meta property="og:type" content="${og.type}" />
         <meta property="og:url" content="https://${og.domain}" />
+
+        ${
+          og.twitter
+            ? ` 
+          <meta name="twitter:title" content="${og.title}" />
+          <meta name="twitter:description" content="${og.description}" />
+          <meta name="twitter:card" content="${og.twitter.card}" />
+          <meta name="twitter:site" content="@${og.twitter.site}" />
+          <meta name="twitter:creator" content="@${og.twitter.creator}" />
+        `
+            : ""
+        }
       </head>
           `;
     },
     icon: html,
-    lang: 'html'
+    lang: "html",
   },
   svelte: {
     code(og: Opengraph) {
@@ -34,11 +46,23 @@ export default {
         <meta property="og:description" content="${og.description}" />
         <meta property="og:type" content="${og.type}" />
         <meta property="og:url" content="https://${og.domain}" />
+
+                ${
+                  og.twitter
+                    ? ` 
+          <meta name="twitter:title" content="${og.title}" />
+          <meta name="twitter:description" content="${og.description}" />
+          <meta name="twitter:card" content="${og.twitter.card}" />
+          <meta name="twitter:site" content="@${og.twitter.site}" />
+          <meta name="twitter:creator" content="@${og.twitter.creator}" />
+        `
+                    : ""
+                }
       </svelte:head>
           `;
     },
     icon: svelte,
-    lang: 'svelte'
+    lang: "svelte",
   },
   nextjs: {
     code(og: Opengraph) {
@@ -60,11 +84,26 @@ export default {
         alt: "${og.title}",
       },
     ],
+  },
+
+  ${
+    og.twitter && 
+    `
+    twitter: {
+    title: "${og.title}",
+    description: "${og.description}",
+    card: "${og.twitter?.card}",
+    site: "@${og.twitter?.site}",
+    creator: "@${og.twitter?.creator}",
   }
+    `
   }
-      `;
+ } `;
     },
     icon: nextjs,
-    lang: 'javascript'
+    lang: "javascript",
   },
-} as Record<string, { code: (og: Opengraph) => string; icon: any , lang: string }>;
+} as Record<
+  string,
+  { code: (og: Opengraph) => string; icon: any; lang: string }
+>;  

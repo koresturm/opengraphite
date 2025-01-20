@@ -3,8 +3,10 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { useOpenGraphContext } from '@/lib/state/opengraph-context'
+import { Opengraph } from '@/lib/type'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
@@ -13,13 +15,32 @@ const EditorPage = () => {
 
   const [formIsValid, setFormIsValid] = useState(false)
 
+  const checkValidity = (form: Opengraph) => {
+    return Object.values(form).map(v => {
+      if(typeof v === 'string' && v.trim().length > 0) {
+        return true
+      }
+
+      if(typeof v === 'object' && Object.values(v).every(v => v.trim().length > 0)){
+        return true
+      }
+
+      return false
+    }).every(v => v)
+  }
+
+  const toggleTwitter = (checked: boolean) => {
+
+     if(checked) setForm({ ...form, twitter: { card: 'summary_large_image' , creator: '', site: '' } })
+     else setForm({ ...form, twitter: undefined })
+  }
+
   useEffect(() => {
-    console.log(form)
-    setFormIsValid(Object.values<string>(form).every(v => v.trim().length > 0))
+    setFormIsValid(checkValidity(form))
   }, [form])
 
   return (
-    <div className='size-full flex items-center justify-center p-4'>
+    <div className='size-full flex items-center justify-center p-4 overflow-auto'>
       <div className='w-full md:w-[400px] flex flex-col gap-4'>
         <h1 className='text-2xl font-bold'>Opengraph Editor</h1>
         <Input
@@ -54,6 +75,47 @@ const EditorPage = () => {
             </SelectGroup>
           </SelectContent>
         </Select>
+
+        <div className='w-full flex flex-col gap-4 p-2 border rounded-md'>
+          <div className='w-full flex gap-4 p-2 rounded-md justify-between items-center'>
+            <small>Twitter</small>
+
+            <Switch onCheckedChange={toggleTwitter} />
+          </div>
+
+          {
+            form.twitter 
+            &&
+            <>
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="What twitter card?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Twitter Cards</SelectLabel>
+                    <SelectItem value="summary">Summary</SelectItem>
+                    <SelectItem value="summary_large_image">Summary Large Image</SelectItem>
+                    <SelectItem value="app">App</SelectItem>
+                    <SelectItem value="player">Player</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+
+              <Input
+                value={form.twitter.site}
+                onChange={(e) => setForm({ ...form, twitter: { ...form.twitter, site: e.target.value } })}
+                placeholder='Site' className='resize-none'
+              />
+
+              <Input
+                value={form.twitter.creator}
+                onChange={(e) => setForm({ ...form, twitter: { ...form.twitter, creator: e.target.value } })}
+                placeholder='Creator' className='resize-none'
+              />
+            </>
+          }
+        </div>
 
         {
           formIsValid &&
