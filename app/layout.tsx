@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     description: "A simple tool to generate opengraph tags for your website.",
     url: "https://opengraphite.vercel.app/",
     siteName: "Opengraphite",
+    type: "website",
     images: [
       {
         url: "https://opengraphite.vercel.app/opengraph.png",
