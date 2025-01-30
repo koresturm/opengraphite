@@ -16,7 +16,7 @@ export default function Home() {
         />
       </div>
       <h1 className="text-2xl md:text-5xl lg:text-7xl font-bold">Opengraphite</h1>
-      <p className="text-lg">
+      <p className="text-lg text-center">
         A simple tool to generate opengraph tags for your website.
       </p>
 
